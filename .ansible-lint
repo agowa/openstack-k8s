@@ -1,0 +1,8 @@
+---
+parseable: true
+skip_list:
+  # see https://docs.ansible.com/ansible-lint/rules/default_rules.html for a list of all default rules
+
+  # These rules are intentionally skipped:
+  # [E701]: "meta/main.yml should contain relevant info"
+  - '701'

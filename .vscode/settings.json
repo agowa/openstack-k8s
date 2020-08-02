@@ -1,0 +1,21 @@
+{
+  "editor.insertSpaces": true,
+  "files.exclude": {
+    ".build": true,
+    ".git": true,
+    ".terraform": true,
+    "**/.DS_Store": true,
+  },
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+  "grunt.autoDetect": "off",
+  "gulp.autoDetect": "off",
+  "jake.autoDetect": "off",
+  "npm.autoDetect": "off",
+  "search.exclude": {
+    ".terrafrom.tfstate": true,
+    ".terrafrom/**": true,
+    ".vscode/**": true,
+  },
+  "typescript.tsc.autoDetect": "off",
+}

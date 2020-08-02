@@ -1,0 +1,76 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Init venv",
+      "type": "shell",
+      "command": "python3",
+      "args": [
+        "-m",
+        "venv",
+        "venv",
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+      },
+    },
+    {
+      "label": "Install packages",
+      "type": "shell",
+      "command": "/bin/sh",
+      "args": [
+        "-c",
+        "source ./venv/bin/activate && pip3 install -r requirements.txt && pip3 list --outdated --format=freeze | grep -v \"^\\-e\" | cut -d = -f 1  | xargs -n1 pip3 install -U",
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "Init venv",
+      ],
+    },
+    {
+      "label": "Run terraform init",
+      "type": "shell",
+      "command": "/bin/sh",
+      "args": [
+        "-c",
+        "source ./venv/bin/activate && terraform init"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "Install packages",
+      ],
+    },
+    {
+      "label": "Run terraform apply",
+      "type": "shell",
+      "command": "/bin/sh",
+      "args": [
+        "-c",
+        "source ./openrc.sh && source ./venv/bin/activate && terraform apply"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+    },
+    {
+      "label": "Run terraform destroy",
+      "type": "shell",
+      "command": "/bin/sh",
+      "args": [
+        "-c",
+        "source ./openrc.sh && source ./venv/bin/activate && terraform destroy"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+    },
+  ],
+}
