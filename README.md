@@ -17,3 +17,10 @@ Simple k8s deployment within openstack cloud environments
 1. Create openstack resources
     1. Check the variables within `00-create-k8s-nodes.tf` and if necessary overwrite them within a `terraform.tfvars` file.
     1. Run `terraform apply` to provision your infrastrukture.
+
+## How to deploy using VS Code
+
+1. Install all recommended extensions
+1. Open the quick run dialog.
+1. Click on "Run terraform init"
+1. Click on "Run terraform apply"
