@@ -1,8 +1,21 @@
 # openstack-k8s
 
-Simple k8s deployment within openstack cloud environments
+Simple k8s deployment within openstack cloud environments.
+This project is based upon [Kubespray](https://github.com/kubernetes-sigs/kubespray.git)
+and tries to fill in the "missing parts".
+
+As well as providing an ready to run example including a terraform deployment.
 
 ## How to deploy
+
+### How to deploy using VS Code
+
+1. Install all recommended extensions
+1. Open the quick run dialog.
+1. Click on "Run terraform init"
+1. Click on "Run terraform apply"
+
+### How to deploy from command line
 
 1. Prepare
     1. Log into your openstack account and download your `openrc.sh` (OpenStack RC File v3) file.
@@ -17,10 +30,3 @@ Simple k8s deployment within openstack cloud environments
 1. Create openstack resources
     1. Check the variables within `00-create-k8s-nodes.tf` and if necessary overwrite them within a `terraform.tfvars` file.
     1. Run `terraform apply` to provision your infrastrukture.
-
-## How to deploy using VS Code
-
-1. Install all recommended extensions
-1. Open the quick run dialog.
-1. Click on "Run terraform init"
-1. Click on "Run terraform apply"
