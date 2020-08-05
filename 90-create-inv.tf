@@ -1,6 +1,12 @@
 resource "null_resource" "ansible-inventory" {
 
-  depends_on = ["openstack_compute_instance_v2.k8s-master","openstack_compute_instance_v2.k8s-node"]
+  depends_on = [
+    "openstack_compute_instance_v2.k8s-master",
+    "openstack_compute_instance_v2.k8s-worker",
+    "openstack_networking_port_v2.k8s-master-port",
+    "openstack_networking_port_v2.k8s-worker-port",
+    "openstack_networking_subnet_v2.subnet_k8s"
+  ]
 
   # Clear inventory
   provisioner "local-exec" {
@@ -28,7 +34,7 @@ resource "null_resource" "ansible-inventory" {
     command =  "echo \"\n[kube-node]\" >> inventory.ini"
   }
   provisioner "local-exec" {
-    command =  "echo \"${join("\n",formatlist("%s ansible_ssh_host=%s", openstack_compute_instance_v2.k8s-node.*.name, openstack_compute_instance_v2.k8s-node.*.network.0.fixed_ip_v6))}\" >> inventory.ini"
+    command =  "echo \"${join("\n",formatlist("%s ansible_ssh_host=%s", openstack_compute_instance_v2.k8s-worker.*.name, openstack_compute_instance_v2.k8s-worker.*.network.0.fixed_ip_v6))}\" >> inventory.ini"
   }
 
   provisioner "local-exec" {

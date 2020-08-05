@@ -1,6 +1,12 @@
 resource "null_resource" "ssh-known_hosts" {
 
-  depends_on = ["openstack_compute_instance_v2.k8s-master","openstack_compute_instance_v2.k8s-node"]
+  depends_on = [
+    "openstack_compute_instance_v2.k8s-master",
+    "openstack_compute_instance_v2.k8s-worker",
+    "openstack_networking_port_v2.k8s-master-port",
+    "openstack_networking_port_v2.k8s-worker-port",
+    "openstack_networking_subnet_v2.subnet_k8s"
+  ]
 
   # Clear known_hosts file
   provisioner "local-exec" {

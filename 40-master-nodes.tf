@@ -9,6 +9,6 @@ resource "openstack_compute_instance_v2" "k8s-master" {
     "${openstack_networking_secgroup_v2.secgroup_k8s-cluster.name}"
   ]
   network {
-    name = "${openstack_networking_network_v2.network_k8s.name}"
+    port = "${openstack_networking_port_v2.k8s-master-port.*.id[count.index]}"
   }
 }
