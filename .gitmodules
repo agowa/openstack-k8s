@@ -1,0 +1,8 @@
+[submodule "kubespray"]
+	path = kubespray
+	url = https://github.com/kubernetes-sigs/kubespray.git
+	branch = master
+[submodule "plugins/mitogen"]
+	path = plugins/mitogen
+	url = https://github.com/dw/mitogen.git
+	branch = master
