@@ -1,11 +1,11 @@
 resource "null_resource" "ansible-inventory" {
 
   depends_on = [
-    "openstack_compute_instance_v2.k8s-master",
-    "openstack_compute_instance_v2.k8s-worker",
-    "openstack_networking_port_v2.k8s-master-port",
-    "openstack_networking_port_v2.k8s-worker-port",
-    "openstack_networking_subnet_v2.subnet_k8s"
+    openstack_compute_instance_v2.k8s-master,
+    openstack_compute_instance_v2.k8s-worker,
+    openstack_networking_port_v2.k8s-master-port,
+    openstack_networking_port_v2.k8s-worker-port,
+    openstack_networking_subnet_v2.subnet_k8s
   ]
 
   # Clear inventory
