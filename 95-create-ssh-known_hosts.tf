@@ -1,12 +1,16 @@
 resource "null_resource" "ssh-known_hosts" {
 
-  depends_on = [
-    openstack_compute_instance_v2.k8s-master,
-    openstack_compute_instance_v2.k8s-worker,
-    openstack_networking_port_v2.k8s-master-port,
-    openstack_networking_port_v2.k8s-worker-port,
-    openstack_networking_subnet_v2.subnet_k8s
-  ]
+  triggers = {
+    k8s_master_id = join(",", openstack_compute_instance_v2.k8s-master.*.id)
+    k8s_worker_id = join(",", openstack_compute_instance_v2.k8s-worker.*.id)
+    k8s_master_port_id = join(",", openstack_networking_port_v2.k8s-master-port.*.id)
+    k8s_worker_port_id = join(",", openstack_networking_port_v2.k8s-worker-port.*.id)
+    k8s_subnet_id = join(",", openstack_networking_subnet_v2.subnet_k8s.*.id)
+  }
+
+  provisioner "local-exec" {
+    command = "echo 'Wait 30 seconds for remote to boot up and write the ssh public key int othe log' && sleep 30"
+  }
 
   # Clear known_hosts file
   provisioner "local-exec" {

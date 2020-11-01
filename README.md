@@ -8,6 +8,11 @@ As well as providing an ready to run example including a terraform deployment.
 
 ## How to deploy
 
+### Warning
+
+First of all a warning, this script will generate a ssh keypari for connecting to the instances.
+This keypair will be stored also within your tfstate file, so keep it as secure as `.ssh.vpass`.
+
 ### How to deploy using VS Code
 
 1. Install all recommended extensions
