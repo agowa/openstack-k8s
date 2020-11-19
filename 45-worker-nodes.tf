@@ -1,6 +1,6 @@
 resource "openstack_compute_instance_v2" "k8s-worker" {
   count = var.worker-node-count
-  name = "k8s-worker-${count.index}"
+  name = "k8s-worker-${count.index}.${var.dns-domain}"
   image_name = var.image-name
   flavor_name = var.worker-node-image-flavor
   key_pair = openstack_compute_keypair_v2.ssh_keypair.name

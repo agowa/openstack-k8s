@@ -1,8 +1,40 @@
-[submodule "kubespray"]
-	path = kubespray
-	url = https://github.com/kubernetes-sigs/kubespray.git
-	branch = master
 [submodule "plugins/mitogen"]
 	path = plugins/mitogen
 	url = https://github.com/dw/mitogen.git
+	branch = master
+[submodule "roles/ansible-hostname"]
+	path = roles/ansible-hostname
+	url = https://chaos.expert/agowa338-ansible/ansible-hostname.git
+	branch = master
+[submodule "roles/ansible-prerequirements"]
+	path = roles/ansible-prerequirements
+	url = https://chaos.expert/agowa338-ansible/ansible-prerequirements.git
+	branch = master
+[submodule "roles/systemd-timesyncd"]
+	path = roles/systemd-timesyncd
+	url = https://chaos.expert/agowa338-ansible/systemd-timesyncd.git
+	branch = master
+[submodule "roles/ansible-systemd-networkd"]
+	path = roles/ansible-systemd-networkd
+	url = https://chaos.expert/agowa338-ansible/ansible-systemd-networkd.git
+	branch = master
+[submodule "roles/Stouts.sudo"]
+	path = roles/Stouts.sudo
+	url = https://chaos.expert/agowa338-ansible/Stouts.sudo.git
+	branch = master
+[submodule "roles/ansible-locale"]
+	path = roles/ansible-locale
+	url = https://chaos.expert/agowa338-ansible/ansible-locale.git
+	branch = master
+[submodule "roles/ansible-docker"]
+	path = roles/ansible-docker
+	url = https://chaos.expert/agowa338-ansible/ansible-docker.git
+	branch = master
+[submodule "roles/ansible-installupdates"]
+	path = roles/ansible-installupdates
+	url = git@chaos.expert:agowa338-ansible/ansible-installupdates.git
+	branch = master
+[submodule "roles/openssh"]
+	path = roles/openssh
+	url = https://chaos.expert/agowa338-ansible/openssh.git
 	branch = master

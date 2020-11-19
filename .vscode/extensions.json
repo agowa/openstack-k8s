@@ -24,5 +24,6 @@
     "vscodevim.vim",
     "vscoss.vscode-ansible",
     "wayou.vscode-todo-highlight",
+    "ms-vscode-remote.remote-containers",
   ],
 }

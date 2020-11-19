@@ -201,3 +201,5 @@ openrc.sh
 inventory.ini
 known_hosts
 .ssh*.vpass
+.vpass
+tmp/

@@ -1,0 +1,14 @@
+sudo_enabled: yes
+sudo_groups:
+  - sudo
+sudo_passwordless:
+  - sudo
+sudo_agent_forwarding: yes
+
+sudo_defaults:
+  - '!lecture'
+  - tty_tickets
+  - '!fqdn'
+  - 'env_reset'
+  - 'mail_badpass'
+  - 'secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin"'
