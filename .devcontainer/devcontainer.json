@@ -16,7 +16,7 @@
     },
 
     // Specifies a command that should be run after the container has been created.
-    "postCreateCommand": "python -m venv --symlinks --clear venv && source ./venv/bin/activate && pip install -r requirements.txt",
+    "postCreateCommand": "python -m venv --symlinks --clear venv && source ./venv/bin/activate && pip install -r requirements.txt && echo '. /workspaces/*/venv/bin/activate' >> ~/.bashrc && cp -n example-openrc.sh openrc.sh && chmod 0500 /workspaces/*/openrc.sh && echo '. /workspaces/*/openrc.sh' >> ~/.bashrc",
 
     // Add the IDs of extensions you want installed when the container is created in the array below.
     "extensions": [
