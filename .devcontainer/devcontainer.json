@@ -2,6 +2,10 @@
     "name": "DeploymentContainer",
     "dockerFile": "Dockerfile",
 
+    // To make IPv6 work even on notebooks the simplest way with docker is to just use host networking,
+    // this will always work, regardless of docker having a delegated IPv6 Prefix or not.
+    "runArgs": [ "--network=host" ],
+
     // Use 'appPort' to create a container with published ports. If the port isn't working, be sure
     // your server accepts connections from all interfaces (0.0.0.0 or '*'), not just localhost.
     // "appPort": [3000],
