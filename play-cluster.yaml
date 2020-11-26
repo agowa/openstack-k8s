@@ -10,8 +10,8 @@
       tags: prerequirements
     - role: ansible-installupdates
       tags: installUpdates
-#    - role: ansible-hostname
-#      tags: hostname
+    - role: ansible-hostname
+      tags: hostname
     - role: systemd-timesyncd
       tags: systemd-timesyncd
     - role: ansible-systemd-networkd
