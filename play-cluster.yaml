@@ -1,7 +1,8 @@
 ---
-- name: Prerequirements for Ansible
+- name: Prerequirements
   hosts: k8s-cluster
-  stategy: free
+  strategy: free
+  # ansible-prerequirements will gather faccts for us, after making sure that python is installed.
   gather_facts: false
   become: true
   roles:
@@ -9,23 +10,19 @@
       tags: prerequirements
     - role: ansible-installupdates
       tags: installUpdates
-
-#- hosts: k8s-cluster
-#  strategy: free
-#  gather_facts: false
-#  roles:
 #    - role: ansible-hostname
 #      tags: hostname
-#    - role: systemd-timesyncd
-#      tags: systemd-timesyncd
+    - role: systemd-timesyncd
+      tags: systemd-timesyncd
 #    - role: ansible-systemd-networkd
 #      tags: systemd-networkd
-#    - role: Stouts.sudo
-#      tags: sudo
-#    #- role: openssh
-#    #  tags: openssh
-#    - role: ansible-locale
-#      tags: locale
+#      # Note: May, always reports as changed.
+    - role: Stouts.sudo
+      tags: sudo
+    - role: openssh
+      tags: openssh
+    - role: ansible-locale
+      tags: locale
 #    #- role: ansible-role-pacman
 #    #  tags: pacman
 #    - role: ansible-docker
