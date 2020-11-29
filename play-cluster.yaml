@@ -25,5 +25,5 @@
       tags: locale
 #    #- role: ansible-role-pacman
 #    #  tags: pacman
-#    - role: ansible-docker
-#      tags: docker
+    - role: ansible-docker
+      tags: docker
