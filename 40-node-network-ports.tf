@@ -9,6 +9,9 @@ resource "openstack_networking_port_v2" "k8s-worker-port" {
   security_group_ids = [
     openstack_networking_secgroup_v2.secgroup_k8s-cluster.id
   ]
+  allowed_address_pairs {
+    ip_address = cidrsubnet(openstack_networking_subnet_v2.subnet_k8s.cidr, 48, 11*65536 + count.index)
+  }
 }
 
 resource "openstack_networking_port_v2" "k8s-master-port" {
@@ -22,4 +25,7 @@ resource "openstack_networking_port_v2" "k8s-master-port" {
   security_group_ids = [
     openstack_networking_secgroup_v2.secgroup_k8s-cluster.id
   ]
+  allowed_address_pairs {
+    ip_address = cidrsubnet(openstack_networking_subnet_v2.subnet_k8s.cidr, 48, 10*65536 + count.index)
+  }
 }

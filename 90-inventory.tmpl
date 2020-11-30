@@ -1,16 +1,21 @@
+[all]
+%{ for index, node in distinct(concat(kube_master, kube_etcd, kube_node)) ~}
+  ${node.name} ansible_ssh_host=${trim(node.network.0.fixed_ip_v6, "[]")} ansible_user=${logon_user} docker_subnet=${tolist(distinct(concat(kube_master_ports, kube_etcd_ports, kube_node_ports))[index].allowed_address_pairs)[0].ip_address}
+%{ endfor ~}
+
 [kube-master]
 %{ for index, node in kube_master ~}
-  ${node.name} ansible_ssh_host=${trim(node.network.0.fixed_ip_v6, "[]")} ansible_user=${logon_user}
+  ${node.name}
 %{ endfor ~}
 
 [etcd]
 %{ for index, node in kube_etcd ~}
-  ${node.name} ansible_ssh_host=${trim(node.network.0.fixed_ip_v6, "[]")} ansible_user=${logon_user}
+  ${node.name}
 %{ endfor ~}
 
 [kube-node]
 %{ for index, node in kube_node ~}
-  ${node.name} ansible_ssh_host=${trim(node.network.0.fixed_ip_v6, "[]")} ansible_user=${logon_user}
+  ${node.name}
 %{ endfor ~}
 
 [k8s-cluster:children]
