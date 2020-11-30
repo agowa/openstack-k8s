@@ -35,3 +35,18 @@ This keypair will be stored also within your tfstate file, so keep it as secure 
 1. Create openstack resources
     1. Check the variables within `00-create-k8s-nodes.tf` and if necessary overwrite them within a `terraform.tfvars` file.
     1. Run `terraform apply` to provision your infrastrukture.
+
+## IP space utilization
+
+A /64 prefix is requested from openstack.
+For this documentation we assume openstack assigned `2001:db8:1000:e::/64` and the instance mac addresses are consecutive and start at `fa:16:3e:00:00:01`.
+
+* Openstack allocates for the gateway: `2001:db8:1000:e::1/128`
+* Reserved range for static allocations: `2001:db8:1000:e:0::/92`
+  * The master nodes use `2001:db8:1000:e:0:a::/96`
+    * Each master node gets a /112 out of that for docker.
+  * The worker nodes use `2001:db8:1000:e:0:b::/96`
+    * Each worker node gets a /112 out of that for docker.
+* Reserved range for addresses allocated through stateless dhcp (as the vendor of the mac is constant the range is smaller than one may expect): `2001:db8:1000:e:f816:3eff:fe00::/104`
+  * EUI-64 for the first node is `::F816:3EFF:FE00:1` (*Note* the bitflip in the 2nd octet `a` to `8` and the `FFFE` that gets inserted after the 6th octet).
+  * Than the EUI-64 gets appended to the prefix to get the instance ip.
