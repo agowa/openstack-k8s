@@ -1,45 +1,53 @@
 # network profiles
 systemd_networkd_network:
-  eth0:
+  ens3:
     - Match:
-      - Name: "eth0"
       - MACAddress: "{{ ansible_default_ipv6.macaddress }}"
     - Network:
       - DHCP: "ipv6"
       - LinkLocalAddressing: "ipv6"
-      - IPv6AcceptRouterAdvertisements: "no"
+      - IPv6AcceptRA: "no"
 
-      - Address: "{{ ansible_default_ipv6.address }}/{{ ansible_default_ipv6.prefix }}"
+      - Address: "{{ ansible_default_ipv6.address }}/128"
+      # Gateawy is on link local address (fe80::), so to simplify routing to other delegated prefixes, just use /128 here.
+      # Otherwise we'd have to add a route to have the /128 of the gateway on-link.
       - Gateway: "{{ ansible_default_ipv6.gateway }}"
-      - DNS: "2a02:c205::1:53"
-      - DNS: "2a02:c205::2:53"
+      - LLMNR: "false"
+      - MulticastDNS: "false"
+      - DNSSEC: "true"
+      - DNSOverTLS: "true"
+      # Note: Google DNS64 is currently not returning any DNS64 AAAA records...
+      # Note2: And ubuntu currently only has systemd version 245 and for the dns name syntax at least 246 is required...
+      #- DNS: "2001:4860:4860::6464#dns64.dns.google."
+      #- DNS: "2001:4860:4860::64#dns64.dns.google."
+      #- DNS: "2606:4700:4700::64#dns64.cloudflare-dns.com."
+      #- DNS: "2606:4700:4700::6400#dns64.cloudflare-dns.com."
+      - DNS: "2606:4700:4700::64"
+      - DNS: "2606:4700:4700::6400"
+    - Link:
+      - MTUBytes: 1500
 
     - Route:
       - Destination: "::/0"
       - Gateway: "{{ ansible_default_ipv6.gateway }}"
+      - GatewayOnLink: "true"
       - IPv6Preference: "high"
 
     - DHCP:
       - RouteMetric: 100
-      - UseMTU: "false"
 
 # link profiles
 systemd_networkd_link:
-  eth0:
+  ens3:
     - Match:
       - MACAddress: "{{ ansible_default_ipv6.macaddress }}"
     - Link:
-      - Name: "eth0"
+      - Name: "ens3"
       - WakeOnLan: "off"
       - MTUBytes: 1500
+      - NamePolicy: kernel
+      - MACAddressPolicy: "persistent"
 
 
 # netdev profiles
 systemd_networkd_netdev: []
-
-# does the role have to restart systemd-networkd to apply the new profiles ?
-systemd_networkd_apply_config: false
-
-# We're using a runtime contfiguration from netplan provided by cloud-init,
-# so just enforce systemd-networkd to be running.
-# Above config is therefore just a backup, as it's overwritten by runtime.

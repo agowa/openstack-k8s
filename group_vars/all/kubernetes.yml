@@ -1,0 +1,6 @@
+KUBEADM_TOKEN: "{{ SECRET_KUBEADM_TOKEN }}"
+KUBE_SERVICE_CIDR: "{{ docker_subnet }}"
+KUBE_SERVICE_DNS_DOMAIN: "cluster.kfrank.innovo.cloud"
+KUBE_APISERVER_ADVERTISE_ADDRESS: "{{ hostvars[groups['kube-master'][0]]['ansible_default_ipv6'].address }}"
+KUBE_MASTER_LB_ADDRESS: "k8s-master.kfrank.innovo.cloud"
+KUBE_CERT_KEY: "{{ SECRET_KUBE_CERT_KEY }}"

@@ -3,6 +3,7 @@
   hosts: k8s-cluster
   strategy: free
   # ansible-prerequirements will gather faccts for us, after making sure that python is installed.
+  any_errors_fatal: true
   gather_facts: false
   become: true
   roles:
@@ -19,11 +20,20 @@
 #      # Note: May, always reports as changed.
     - role: Stouts.sudo
       tags: sudo
-    - role: openssh
-      tags: openssh
+#    - role: openssh
+#      tags: openssh
     - role: ansible-locale
       tags: locale
-#    #- role: ansible-role-pacman
-#    #  tags: pacman
     - role: ansible-docker
       tags: docker
+
+- name: Init cluster
+  hosts:
+    - kube-master
+    - kube-node
+  strategy: linear
+  any_errors_fatal: true
+  become: true
+  roles:
+    - role: ansible-kubernetes
+      tags: kubernetes

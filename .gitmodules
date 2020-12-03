@@ -30,11 +30,15 @@
 	path = roles/ansible-docker
 	url = https://chaos.expert/agowa338-ansible/ansible-docker.git
 	branch = master
-[submodule "roles/ansible-installupdates"]
-	path = roles/ansible-installupdates
-	url = git@chaos.expert:agowa338-ansible/ansible-installupdates.git
-	branch = master
 [submodule "roles/openssh"]
 	path = roles/openssh
 	url = https://chaos.expert/agowa338-ansible/openssh.git
+	branch = master
+[submodule "roles/ansible-kubernetes"]
+	path = roles/ansible-kubernetes
+	url = https://chaos.expert/agowa338-ansible/ansible-kubernetes.git
+	branch = master
+[submodule "roles/ansible-installupdates"]
+	path = roles/ansible-installupdates
+	url = https://chaos.expert/agowa338-ansible/ansible-installupdates.git
 	branch = master

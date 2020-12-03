@@ -2,3 +2,6 @@ docker_daemon_options:
   fixed-cidr-v6: '{{ docker_subnet }}'
   ipv6: true
   debug: false
+  exec-opts:
+    - "native.cgroupdriver=systemd"
+  storage-driver: overlay2
