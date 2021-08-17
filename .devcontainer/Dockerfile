@@ -1,4 +1,4 @@
-FROM archlinux/base:latest AS base
+FROM archlinux:base-devel AS base
 
 RUN \
     (rm -rf /etc/pacman.d/gnupg && pacman-key --init && pacman-key --populate archlinux) && \
